@@ -121,7 +121,7 @@ params:
     title: "🇫🇷 Joël Séguillon."
     subtitle: "Empowering others to independently accomplish tasks rather than opening Jira tickets"
     content: "Giving the best of my experience to help companies to shift and operate their services with the help of Kubernetes, automation systems and a mix of coaching and devops culture."
-    # image: /images/hero.svg
+    image: /images/jseguillon.png
     bottomImage:
       enable: false
     # roundImage: true # Make hero image circular | default false
