@@ -23,17 +23,17 @@ markup:
       unsafe: true
 
 Menus:
-  main:
-    - identifier: blog
-      name: Blog
-      title: Blog posts
-      url: /blogs
-      weight: 1
-    - identifier: gallery
-      name: Gallery
-      title: Blog posts
-      url: /gallery
-      weight: 2
+  # main:
+  #   - identifier: blog
+  #     name: Blog
+  #     title: Blog posts
+  #     url: /blogs
+  #     weight: 1
+  #   - identifier: gallery
+  #     name: Gallery
+  #     title: Blog posts
+  #     url: /gallery
+  #     weight: 2
     #Dropdown menu
     # - identifier: dropdown
     #   title: Example dropdown menu
