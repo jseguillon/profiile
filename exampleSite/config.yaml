@@ -331,11 +331,11 @@ params:
     #   enable: false
     #   disableFeaturedImage: false
     socialNetworks:
-      github: https://github.com
-      linkedin: https://linkedin.com
-      twitter: https://twitter.com
-      instagram: https://instagram.com
-      facebook: https://facebook.com
+      github: https://github.com/jseguillon/
+      linkedin: https://fr.linkedin.com/in/jo%C3%ABl-s%C3%A9guillon-91a55814?trk=public_post_feed-actor-name
+      twitter: https://twitter.com/Jseguillon
+      # instagram: https://instagram.com
+      # facebook: https://facebook.com
 
   # List pages like blogs and posts
   listPages:
