@@ -147,16 +147,16 @@ params:
     title: "About Me"
     # image: "/images/me.png"
     content: |-
-      > 20 years in IT:fom java dev to lead java/php/spa, from writing specs to managing projects, from installing postfix to deploying on premises Kubernetes.
+      > 20 years in IT: from java dev to lead java/php/spa, from writing specs to managing projects, from installing postfix to deploying on premises Kubernetes.
       I now help people to leverage and demistify modern techologies.
     skills:
       enable: true
-      title: "Most loved techs:"
+      title: "Most loved:"
       items:
         - "Kubernetes"
-        - "Kyverno"
         - "Gitlab"
         - "Ansible"
+        - "Kubevirt"
         - "Python"
         - "Kubernetes :)"
 
@@ -176,12 +176,12 @@ params:
         content: "Transforming legacy docker-compose to k8s. WIP"
 
       - job: "Devops"
-        company: "Ariadnext"
+        company: "IdNow"
         # companyUrl: "https://example.com"
         # date: "Sep 2020 - Dec 2021"
         featuredLink:
           enable: false
-          url: "https://example.com"
+          url: "https://www.idnow.io"
         info:
           enable: false
           content: Ansible and gitlab to CD both on prem k8s-cluster and other infra stuffs but also apps
@@ -189,7 +189,7 @@ params:
           Ansible and gitlab to CD both on prem k8s-cluster and other infra stuffs but also apps
       - job: "Kubernetes and Ansible expert"
         company: "Ateme"
-        # companyUrl: "https://example.com"
+        companyUrl: "https://www.ateme.com/"
         # date: "Jan 2020 - Aug 2020"
         info:
           enable: false
@@ -197,7 +197,19 @@ params:
           enable: false
           url: "https://example.com"
         content: |
-          Creation of a customisation of kubespray to deploy full offline Kubernetes clusters, deployed on customers sites, for broadcasting and converting videos. Up to 70 machines!
+          Customisation of kubespray to deploy full offline Kubernetes clusters, deployed on customers sites, for broadcasting and converting videos. Up to 70 machines with tons of CPUs, SR-IOV networks and specfic GPU hardware !
+      - job: "Service: 17 years of growing up"
+        company: "Niji"
+        companyUrl: "https://www.niji.fr"
+        # date: "Jan 2020 - Aug 2020"
+        info:
+          enable: false
+        featuredLink:
+          enable: false
+          url: "https://example.com"
+        content: |
+          When I entered Niji, it was company of 18. When I left it we were more than 800. Dev, lead, tests, automations, ops, project management, software factory creator an maintainer... An amazing experience💙
+
   # Education
   education:
     enable: false
