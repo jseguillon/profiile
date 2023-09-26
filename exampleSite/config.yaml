@@ -209,7 +209,7 @@ params:
           enable: false
           url: "https://example.com"
         content: |
-          When I entered Niji, it was company of 18. When I left it we were more than 800. Dev, lead, tests, automations, ops, project management, software factory creator an maintainer... An amazing experience💙
+          When I entered Niji, it was company of 18. When I left it we were more than 800. Dev, lead, tests, automations, ops, project management, software factory creator an maintainer... An amazing experience💙 
 
   # Education
   education:
