@@ -118,9 +118,9 @@ params:
   # Hero
   hero:
     enable: true
-    intro: "Hi, this my profile page"
-    title: "🇫🇷 Joël Séguillon."
-    subtitle: "Empowering others to independently accomplish tasks rather than opening Jira tickets"
+    intro: "Hi, welcome to my home site"
+    title: "Joël Séguillon"
+    subtitle: "Experienced dev&ops guy"
     content: "Giving the best of my experience to help companies to shift and operate their services with the help of Kubernetes, automation systems and a mix of coaching and devops culture."
     image: /images/jseguillon.png
     bottomImage:
