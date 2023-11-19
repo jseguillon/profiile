@@ -1,147 +1,78 @@
 ---
-title: "Markdown Syntax"
-date: 2021-04-03T23:29:21+05:30
+title: "1er billet de blog"
+date: 2023-11-19T23:02:21+01:00
 draft: false
-github_link: "https://github.com/gurusabarish/hugo-profile"
-author: "Gurusabarish"
+github_link: "https://github.com/jseguillon"
+author: "jseguillon"
 tags:
-  - Markdown syntax
-  - Sample
-  - example
+  - Ansible
+  - Débuter
+  - Tips and tricks
 image: /images/post.jpg
 description: ""
 toc:
 ---
 
-## Paragraph
+Ce premier billet, sur Ansible. Ca fait un bon moment que je pratique cet outil (8 bonnes années je pense) et parfois je vous des porjets qui débutent assez mals. J'écris ce billet dans l'espoir qu'il aide le plus grand nombre à se faciliter la prise en main d'un outil qui a la réputation d'être difficile
 
-TEst
+## La base pour se rendre la vie plus facile
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
+Plusieurs points peuvent vous aider à avoir une expérience plus douce avec Ansible: 
+ - utiliser le check mode,
+ - améliorer les logs
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+(TODO screenshot gauche: une étape, logs affreuses json no color/ droite: deux étapes, logs au top)
 
-## Blockquotes
+### Gloire au check mode 
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+Vous pouvez simuler l'éxécution d'un playbook Ansible 
 
-### Blockquote without attribution
+### Se soucier des belles logs
 
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-> **Note** that you can use _Markdown syntax_ within a blockquote.
+l'option -D => affiche les différences induites par un changement,
 
-### Blockquote with attribution
+TODO: screen avt/après. 
 
-> Don't communicate by sharing memory, share memory by communicating.</p>
-> — <cite>Rob Pike[^1]</cite>
+#### le default callback:
+ANSIBLE_CHECK_MODE_MARKERS pour aller avec le check mode
+la variable ANSIBLE_CALLBACK_RESULT_FORMAT=yaml
+la variable d'environnement ANSIBLE_SHOW_TASK_PATH_ON_FAILURE=True
+la varible ANSIBLE_FORCE_COLOR
+ANSIBLE_DISPLAY_OK_HOSTS
+ANSIBLE_DISPLAY_SKIPPED_HOSTS
 
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+Il y a d'autres callbacks: https://docs.ansible.com/ansible/latest/plugins/callback.html#callback-plugins et aussi Caradoc :) 
 
-## Tables
+NB: vous pouvez aussi régler ces variables via un fichier ansible.ini bien sûr.
 
-Tables aren't part of the core Markdown spec, but Hugo supports supports them out-of-the-box.
+#### Flag verbose
 
-| Name  | Age |
-| ----- | --- |
-| Bob   | 27  |
-| Alice | 23  |
+le flag -v 
+(pensez à le rendre configurable dans les params de la CI ça peut servir)
 
-### Inline Markdown within tables
+TODO: command lines
+=> check playbook infra
+=> deploy infra
+=> check par devs
+=> deploy par devs
 
-| Inline&nbsp;&nbsp;&nbsp; | Markdown&nbsp;&nbsp;&nbsp; | In&nbsp;&nbsp;&nbsp;                | Table  |
-| ------------------------ | -------------------------- | ----------------------------------- | ------ |
-| _italics_                | **bold**                   | ~~strikethrough~~&nbsp;&nbsp;&nbsp; | `code` |
+(mais attention au 1er check mode => recette)
 
-## Code Blocks
+## Des inventaires dynamiques
 
-### Code block with backticks
+Les inventory plugins https://docs.ansible.com/ansible/2.9/plugins/inventory.html#plugin-list
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
+et rappel: possibles d'en mettre plusieurs sur la ligne de commande 
 
-### Code block indented with four spaces
+## Gérer ses dépendances internes
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Example HTML5 Document</title>
-    </head>
-    <body>
-      <p>Test</p>
-    </body>
-    </html>
+(probablement pas plus d'une collection (sera tjs temps de découper)  )
 
-### Code block with Hugo's internal highlight shortcode
+## gare aux credentials Ansible
 
-{{< highlight html >}}
+(=no_log chiant et même pas secure à cause du ANSIBLE_DEBUG)
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
-{{< /highlight >}}
+## gare à molécule 
 
-## List Types
+(=oui c'est chouette mais est-ce que ça vaut le coup face à la flakyness alors qu'on a le check mode et des pltfs de recette)
 
-### Ordered List
-
-1. First item
-2. Second item
-3. Third item
-
-### Unordered List
-
-- List item
-- Another item
-- And another item
-
-### Nested list
-
-- Item
-  1. First Sub-item
-  2. Second Sub-item
-
-## Headings
-
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
-
-# H1
-
-## H2
-
-### H3
-
-#### H4
-
-##### H5
-
-###### H6
-
-## Other Elements — abbr, sub, sup, kbd, mark
-
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

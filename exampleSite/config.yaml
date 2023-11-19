@@ -23,12 +23,12 @@ markup:
       unsafe: true
 
 Menus:
-  # main:
-  #   - identifier: blog
-  #     name: Blog
-  #     title: Blog posts
-  #     url: /blogs
-  #     weight: 1
+  main:
+    - identifier: blog
+      name: Blog
+      title: Blog posts
+      url: /blogs
+      weight: 1
   #   - identifier: gallery
   #     name: Gallery
   #     title: Blog posts
@@ -209,7 +209,7 @@ params:
           enable: false
           url: "https://example.com"
         content: |
-          When I entered Niji, it was company of 18. When I left it we were more than 800. Dev, lead, tests, automations, ops, project management, software factory creator an maintainer... An amazing experience💙 
+          When I entered Niji, it was company of 18. When I left it we were more than 800. Dev, lead, tests, automations, ops, project management, software factory creator an maintainer... An amazing experience💙
 
   # Education
   education:
@@ -337,12 +337,12 @@ params:
     #   messageCaption: "Enter your message here"
 
   footer:
-    # recentPosts:
-    #   path: "blogs"
-    #   count: 3
-    #   title: Recent Posts
-    #   enable: false
-    #   disableFeaturedImage: false
+    recentPosts:
+      path: "blogs"
+      count: 3
+      title: Recent Posts
+      enable: true
+      disableFeaturedImage: false
     socialNetworks:
       github: https://github.com/jseguillon/
       linkedin: https://fr.linkedin.com/in/jo%C3%ABl-s%C3%A9guillon-91a55814?trk=public_post_feed-actor-name
