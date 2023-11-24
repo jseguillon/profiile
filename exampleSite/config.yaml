@@ -1,4 +1,4 @@
-baseURL: "https://jseguillon.netlify.app"
+baseURL: "https://jseguillon.io"
 languageCode: "en-us"
 title: "Joël Séguillon. Freelance."
 theme: hugo-profile
@@ -73,7 +73,7 @@ params:
   animate: true
 
   theme:
-    disableThemeToggle: true
+    disableThemeToggle: false
     defaultTheme: "dark" # dark
 
   font:
@@ -83,21 +83,21 @@ params:
     textAlign: left # default: left
 
   # color preference
-  # color:
-  #   textColor:
-  #   secondaryTextColor:
-  #   backgroundColor:
-  #   secondaryBackgroundColor:
-  #   primaryColor:
-  #   secondaryColor:
+  color:
+    textColor:
+    secondaryTextColor:
+    backgroundColor:
+    secondaryBackgroundColor:
+    primaryColor:
+    secondaryColor:
 
-  #   darkmode:
-  #     textColor:
-  #     secondaryTextColor:
-  #     backgroundColor:
-  #     secondaryBackgroundColor:
-  #     primaryColor:
-  #     secondaryColor:
+    darkmode:
+      textColor: "#e8eeff"
+      secondaryTextColor: 
+      backgroundColor:
+      secondaryBackgroundColor:
+      primaryColor:  "#d9a88c"
+      secondaryColor: 
 
   # If you want to customize the menu, you can change it here
   navbar:
