@@ -154,7 +154,7 @@ On est bientôt en 2024 et les IAs prennent le pouvoir !?! Pour ma part je consi
 De même, on ne recommandera jamais assez l'installation de plugins Ansible dans votre IDE. Vous pouvez avoir de la coloration syntaxique, du lint, de la complétion, des snippets etc... même dans vim ! Ci-dessous l'extension Vscode en action avec Lint qui pleure et la complétion qui fait le job.
 
 
-![Vs code Ansible extension](/images/blogs/01-ansible-facile/caradoc.png "Vs code Ansible extension")
+![Vs code Ansible extension](/images/blogs/01-ansible-facile/vs_code_ansible.png "Vs code Ansible extension")
 
 
 La page qui listes les plugins officiels est [ici](https://ansible.readthedocs.io/projects/language-server/)
@@ -163,10 +163,12 @@ La page qui listes les plugins officiels est [ici](https://ansible.readthedocs.i
 ## Consulter le site de Stéphane Robert
 
 
-Stéphane produit un contenu exhaustif et de qualité sur Ansible, avec une partie blog et une partie formation devops. Si ce n'est déjà fait, consultez d'urgence son [site](https://blog.stephane-robert.info/), il est rempli de bon conseils !
+Stéphane produit un contenu exhaustif et de grande qualité sur Ansible, avec une partie blog et une partie formation devops. Si ce n'est déjà fait, consultez d'urgence son [site](https://blog.stephane-robert.info/), il est rempli de bon conseils !
 
 
 ## La suite au prochain numéro
+
+Pour finir un grand merci à Quentin Joly pour sa relecture et ses conseils. N'hésitez pas à cobsulter son excellent [blog](https://une-tasse-de.cafe/), il y parle notamment d'infrastructures et d'outils. Des billets à déguster avec une bonne tasse de café bien sûr !
 
 
 N'hésitez pas à me faire vos retours ou commentaires, directement sur Twitter (ooops "X" on dit désormais...), je suis friand de feedback :)
