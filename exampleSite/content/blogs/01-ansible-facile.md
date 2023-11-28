@@ -1,15 +1,18 @@
 ---
 title: "Ansible, une meilleure expérience est possible."
-date: 2023-11-25T19:02:21+01:00
+date: 2023-11-25T28:02:21+01:00
 draft: false
 github_link: "https://github.com/jseguillon"
 author: "jseguillon"
 tags:
   - Ansible
   - Débuter
-  - Tips and tricks
+  - Tips
 image: /images/post.jpg
-description: ""
+images: 
+  - /images/post.jpg
+
+description: "Quelques asctuces pour se faciliter la vie avec Ansible"
 toc:
 ---
 
@@ -74,63 +77,76 @@ ansible-playbook -C -D ...
 ## Le "default callback" et ses configurations
 
 
-Quand vous lancer vos playbooks, c'est le plugin "default callback" qui se charge d'afficher les résultats. Et la configuration par défaut peut s'améliorer en réglant quelques variables d'environnement:
-* la variable `ANSIBLE_CHECK_MODE_MARKERS` pour aller avec le check mode: permet de bien indiquer si des tâches ont été lancées en check mode ou pas (encore un qui devrait être activer par défaut :/)
+Quand vous lancer vos playbooks, c'est le plugin "default callback" qui se charge d'afficher les résultats. Et la configuration par défaut peut s'améliorer en réglant quelques configurations.
+
+### `ANSIBLE_CHECK_MODE_MARKERS` 
+
+pour aller avec le check mode: permet de bien indiquer si des tâches ont été lancées en check mode ou pas
+
 ![check mode marker](/images/blogs/01-ansible-facile/check_mod_marker.png "Check mode marker")
 
 
-- la variable `ANSIBLE_SHOW_TASK_PATH_ON_FAILURE=True` affiche le chemin et la ligne de les tâches en erreur, bien pratique aussi
+### `ANSIBLE_SHOW_TASK_PATH_ON_FAILURE` 
+
+affiche le chemin et la ligne de les tâches en erreur, bien pratique aussi
+
 ![failule path](/images/blogs/01-ansible-facile/fail_path.png "Failure path")
 
 
-* la variable `ANSIBLE_CALLBACK_RESULT_FORMAT=yaml`, indispensable pour la lisibilité des debug messages
+### `ANSIBLE_CALLBACK_RESULT_FORMAT`
+
+permet de changer le format de sortie de json vers yaml, indispensable pour la lisibilité
+
 ![Yaml](/images/blogs/01-ansible-facile/yaml_format.png "Yaml")
 
 
+### `ANSIBLE_DISPLAY_OK_HOST` et `ANSIBLE_DISPLAY_SKIPPED_HOSTS`
+
 En général, dans une pipeline CI/CD, j'active toutes ces options et j'utilise également celles-ci :
-* la variable `ANSIBLE_DISPLAY_OK_HOSTS=True` masque les tâches qui sont ok
-* la variable `ANSIBLE_DISPLAY_SKIPPED_HOSTS=true` masque les tâches qui sont skipped
+* la variable `ANSIBLE_DISPLAY_OK_HOSTS=False` masque les tâches qui sont ok
+* la variable `ANSIBLE_DISPLAY_SKIPPED_HOSTS=False` masque les tâches qui sont skipped
 
 
 Je ne les active que sur les étapes de check: l'objectif est de miniser la sortie pour ne voir que les changed, et avec leurs diffs bien sûr.
 
+Dans la démo ci-dessous, il y a plusieurs ok et skipped mais on voit uniquement l'unique diff, c'est top !
+
+![Displays](/images/blogs/01-ansible-facile/displays.png "Displays")
+
+C'est avec toutes ces options que j'arrive à avoir des devs qui cliquent (presque) sereinement sur les pipelines de check d'abord, et de décider seuls d'appliquer ou non les changements qu'ils visualisent. 
 
 ```
 # Check mode qui montre uniquement les changed
-ANSIBLE_DISPLAY_OK_HOSTS=True \
-ANSIBLE_DISPLAY_SKIPPED_HOSTS=true \
+ANSIBLE_DISPLAY_OK_HOSTS=False \
+ANSIBLE_DISPLAY_SKIPPED_HOSTS=False \
 ansible-playbook -C -D ...
 ```
 
+### Une dernière pour la route 
 
-C'est avec toutes ces options que j'arrive à avoir des devs qui cliquent (presque) sereinement sur les pipelines de check d'abord, et de décider seuls d'appliquer ou non les changements qu'ils visualisent.
+la variable `ANSIBLE_FORCE_COLOR=True`, c'est celle-ci qu'il faut activer quand vous avez une pipepline en noir et blanc dans votre outil ce CI/CD préféré.
 
-
-Une dernière pour la route : la variable `ANSIBLE_FORCE_COLOR=True`, c'est celle-ci qu'il faut activer quand vous avez une pipepline en noir et blanc dans votre outil ce CI/CD préféré. Et oui celle-ci aussi devrait être activée par défaut.
-
-
-**Note** : toutes ces variables sont également configurables dans un fichier fichier de configuration `ansible.cfg`. C'est même recommandé (plus propre). Voir la [doc](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/default_callback.html).
+**! Note importante !** toutes ces variables sont également configurables dans un fichier fichier de configuration `ansible.cfg`. C'est même recommandé (plus propre). Voir la [doc](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/default_callback.html).
 
 
 ## Ajouter un autre callback
 
 
-La doc Ansible nous explique:
+La doc Ansible nous explique :
 * que le default callback plugin est un plugin de type "stdout"
-* qu'on ne utiliser qu'un seul "callback plugin stdout" à la fois
+* qu'on ne peut utiliser qu'un seul "callback plugin stdout" à la fois
 
 
 Ca semble triste mais heureusement, Ansible a prévu [d'autres types](https://docs.ansible.com/ansible/latest/plugins/callback.html) de callback plugins
 ![Types de callback plugins](/images/blogs/01-ansible-facile/ansible_doc_callback_plugins.png "Types de callback plugins")
 
 
-Dans la catégorie "aggregate", il y a notamment le callback [Ara](https://ara.recordsansible.org/), qui permet d'enregistrer ses exécutions de playbooks dans une base de données et de les consulter via une interface web. Très pratique mais induit pas mal de lenteur à l'exécution (temps multiplié par 2 d'après mes mesures).
+Dans la catégorie "notifications", il y a notamment le callback [Ara](https://ara.recordsansible.org/), qui permet d'enregistrer ses exécutions de playbooks dans une base de données et de les consulter via une interface web. Très pratique mais induit pas mal de lenteur à l'exécution (temps multiplié par 2 d'après mes mesures, il y a un an; ça c'est peut-être amélioré).
 
 
-Il y en a un aussi super qui permet d'avoir une log au format Asciidoc et pourtant un rendu similaire à une interface Web. Il est incroyable mais n'a pas beacoup évolué depuis qu'il est sorti. Fin de la blague c'est le mien, mon bébé [Caradoc](https://github.com/jseguillon/caradoc). Et si vous le trouvez cool, mettez des petites étoiles et/ou proposer des PRs ya de quoi en faire un outil formidable.
+Il y en a un aussi super, catégorie "aggregator", qui permet d'avoir une log au format Asciidoc et pourtant un rendu similaire à une interface Web. Il est incroyable mais n'a pas beacoup évolué depuis qu'il est sorti. Fin de la blague c'est le mien, mon bébé [Caradoc](https://github.com/jseguillon/caradoc). Et si vous le trouvez cool, mettez des petites étoiles et/ou proposer des PRs ya de quoi en faire un outil formidable. Et il y même une [démo en ligne](https://jseguillon.github.io/caradoc/)
 
-
-![Il est beau je vous dis](/images/blogs/01-ansible-facile/caradoc.png "Je me suis réveillé, j'avais envie de manger des logs.")
+[!["Les logs, c'est la vie."](/images/blogs/01-ansible-facile/caradoc.png "Les logs, c'est la vie.")](https://jseguillon.github.io/caradoc/)
 
 
 ## "Voir" ce qu'Ansible a fait sur un serveur
