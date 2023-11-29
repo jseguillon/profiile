@@ -1,6 +1,6 @@
 ---
 title: "Ansible, une meilleure expérience est possible."
-date: 2023-11-25T28:02:21+01:00
+date: 2023-11-28T00:02:21+01:00
 draft: false
 github_link: "https://github.com/jseguillon"
 author: "jseguillon"
@@ -12,7 +12,7 @@ image: /images/post.jpg
 images: 
   - /images/post.jpg
 
-description: "Quelques asctuces pour se faciliter la vie avec Ansible"
+description: "Quelques astuces pour se faciliter la vie avec Ansible"
 toc:
 ---
 
@@ -24,6 +24,7 @@ Ansible a mauvaise réputation en terme d'expérience utilisateur:
 
 Ce billet de blog, tout premier pour moi, est là pour donner quelques pistes pour se rendre la vie plus belle quand on utilise Ansible. Let's go!
 
+*Note*: si vous n'avez jamais lancer de playbooks Ansible et que vous recherchez des ressources, commencez par la fin de l'article et visitez le [site de Stéphane](https://blog.stephane-robert.info/).
 
 ## L'option diff
 
@@ -149,6 +150,8 @@ Il y en a un aussi super, catégorie "aggregator", qui permet d'avoir une log au
 [!["Les logs, c'est la vie."](/images/blogs/01-ansible-facile/caradoc.png "Les logs, c'est la vie.")](https://jseguillon.github.io/caradoc/)
 
 
+EDIT: Je rajoute un callback qui à l'air vraiment bien. Je ne l'ai pas testé mais comme c'est fait par un français je vous le signale sans même réfléchir :) => ["ansible_stdout_compact_logger"](https://github.com/octplane/ansible_stdout_compact_logger) 
+
 ## "Voir" ce qu'Ansible a fait sur un serveur
 
 
@@ -184,7 +187,7 @@ Stéphane produit un contenu exhaustif et de grande qualité sur Ansible, avec u
 
 ## La suite au prochain numéro
 
-Pour finir un grand merci à Quentin Joly pour sa relecture et ses conseils. N'hésitez pas à cobsulter son excellent [blog](https://une-tasse-de.cafe/), il y parle notamment d'infrastructures et d'outils. Des billets à déguster avec une bonne tasse de café bien sûr !
+Pour finir un grand merci à Quentin Joly pour sa relecture et ses conseils. N'hésitez pas à consulter son excellent [blog](https://une-tasse-de.cafe/), il y parle notamment d'infrastructures et d'outils. Des billets à déguster avec une bonne tasse de café bien sûr !
 
 
 N'hésitez pas à me faire vos retours ou commentaires, directement sur Twitter (ooops "X" on dit désormais...), je suis friand de feedback :)
