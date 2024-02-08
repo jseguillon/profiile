@@ -1,0 +1,5 @@
+{{- $normal := .Get 0 }}
+{{- $alt := .Get 1 }}
+{{- $normalPath := absURL (printf "images/%s" $normal) }}
+<img srcset = '{{ $normalPath }}' alt = '{{ $alt }}' class="invert-dark">
+
