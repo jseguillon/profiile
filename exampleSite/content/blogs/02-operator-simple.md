@@ -1,6 +1,6 @@
 ---
 title: "Comprendre les Operators Kubernetes rapidement"
-date: 2024-02-07T00:02:21+01:00
+date: 2024-02-08T19:02:21+01:00
 draft: false
 github_link: "https://github.com/jseguillon"
 author: "jseguillon"
@@ -17,23 +17,23 @@ description: 'Une explication simplifiée de la pattern "Operator" pour Kubernet
 toc:
 ---
 
-C'est une histoire qu'on raconte pour faire peur aux enfants mais qui pourtant fait frémir d'horreur même les plus chevronné(e)s. L'histoire d'une ingénieure qui voulait héberger une base de données dans un cluster Kubernetes. Après avoir scrupuleusement lu la doc technique, elle se lança hardiement dans la production de fichiers YAMLs pour porter son hébergement dans le cluster. Connaissant bien ses Pods, Deployements, Services et autre objets Kubernetes, la tâche ne semblait pas si ardue. Mais elle dû produire tant et tant de fichiers YAMLs, de templates Helm et de Ansible que son moral finit par s'écrouler et elle choisit de se reconvertir en agente immobilière. Une fin tragique.
+C'est une histoire qu'on raconte pour faire peur et qui fait frémir d'horreur même les plus chevronné(e)s. L'histoire d'une ingénieure qui voulait héberger une base de données (ou un Harbor on ne sait plus trop), dans un cluster Kubernetes. Après avoir scrupuleusement lu la doc technique, elle se lança hardiement dans la production de fichiers YAMLs pour porter son hébergement dans le cluster. Connaissant bien ses Pods, Deployements, Services et autre objets Kubernetes, la tâche ne semblait pas si ardue. Mais elle dû produire tant et tant de fichiers YAMLs, de templates Helm et de Ansible que son moral finit par s'écrouler et elle choisit de se reconvertir en agente immobilière. Une fin tragique.
 
 ![scared](/images/blogs/02-operator-simple/scared.gif)
 
 Heureusement ça ne se passe pas exactement comme ça dans le monde Kubernetes.
 
-## Pattern Operator: l'utilité de la chose
+## Pattern Operator : de l'utilité de la chose
 
 Si les personnes en charge de fournir des services aiment tant Kubernetes c'est qu'il y a une solution élégante à ce problème : la pattern Operator. Et ça rend le déploiement de services complexes encore plus simples que sur des VMs.
 
-Je vous explique: en général si on veut déployer une base de données haute dispo (ou équivalente), un système de fichier distribué, un stockage objet etc..., dans des VMs et sans Kubernetes, on va devoir sortir l'artillerie lourde. Comprendre : des lignes de shell/Ansible/Pulumi/whatever, qui vont devoir déployer la solution (paquets/fichier de confs), potentiellement sur des noeuds de différents OS (aïe). Ça se fait mais je vous assure c'est pas évident (et c'est coûteux). A coder manuellement, on drift du manuel d'install officiel, qui lui même se met à jour au gré des versions qu'on doit reporter, bref c'est pas la joie.
+Je vous explique: en général si on veut déployer une base de données haute dispo (ou équivalente), un système de fichier distribué, un stockage objet etc..., dans des VMs et sans Kubernetes, on va devoir sortir l'artillerie lourde. Comprendre : des lignes de shell/Ansible/Pulumi/whatever, qui vont devoir déployer la solution (paquets/fichier de confs), potentiellement sur des noeuds de différents OS (aïe). Ça se fait mais je vous assure c'est pas si évident.
 
-Dans Kubernetes c'est différent. Comme les APIs fournissent des objets standard qui décrivent les unités d'exécution, l'équilibrage de charge, la réplication, le scaling, etc... on peut écrire *un programme* qui sait déployer correctement un service complexe dans les règles de l'art. Et peu importe les briques techniques ou les OS qui seront derrière, l'ensemble des mécanismes dont le service a besoin pour fonctionner seront garantis par l'API et les objets que le dit programme aura créé. Ce programme, c'est l'Operator.
+Dans Kubernetes, les APIs fournissent des objets standards qui décrivent les unités d'exécution, l'équilibrage de charge, la réplication, le scaling, etc... on peut écrire *un programme* qui sait déployer correctement un service complexe dans n'importe quel Kuberentes. Et peu importe les briques techniques ou les OS qui seront derrière, l'ensemble des mécanismes dont le service a besoin pour fonctionner seront garantis par l'API et les objets que le dit programme aura créé. Ce programme, c'est l'Operator.
 
 {{< picture "blogs/02-operator-simple/operator-base.svg" "Description d'un opérateur" >}}
 
-## Operator: la magie c'est l'API
+## Des Operators à gogo
 
 Si vous avez bien suivi, on parle d'un programme qui crée des objets sur l'API Kubernetes, un peu comme si vous poussiez des YAMLs de façons automatisée. Et là vous me dîtes: si je dois coder un "Operator", ça va pas être plus simple que de faire du Ansible ou du Helm.
 
@@ -136,7 +136,7 @@ Premièrement, la complexité des formats CRs. Implicitement vous aurez peut-êt
   * l'hébergement du service dans Kubernetes (combien de quels pods, services etc...)
   * la configuration du service lui même (fichiers de configs de mongo dans notre exemple)
 
-Ce mélange des genres ne rend pas la configuration des CRs évidentes. Surtout lorsque l'on cherche une option particulière qu'on injecter dans les fichiers de confs, on peut vite se perdre... ou ne pas trouver. Parce qu'évidemment, comme l'Operator est un soft lui-même, si l'option de conf que vous cherchez n'existe pas dans le CR, il ne vous restera plus qu'à ouvrir un ticket sur le dépôt du projet et croiser les doigts. A moins que vous ne sachiez coder en Go bien sûr.
+Ce mélange des genres ne rend pas la configuration des CRs évidentes. Surtout lorsque l'on cherche une option particulière, on peut vite se perdre dans le mapping... ou ne pas trouver. Parce qu'évidemment, comme l'Operator est un programme, si l'option de conf que vous cherchez n'existe pas dans le CR, il ne vous restera plus qu'à ouvrir un ticket sur le dépôt du projet et croiser les doigts. A moins que vous ne sachiez coder (probablement en Go).
 
 ### Les releases
 
