@@ -5,14 +5,15 @@ draft: false
 github_link: "https://github.com/jseguillon"
 author: "jseguillon"
 tags:
-  - Ansible
-  - Débuter
-  - Tips
-image: /images/post2.webp
+  - Operator
+  - Kubernetes
+  - Explications
+  - Simplifications
+image: /images/post2.png
 images: 
-  - /images/post2.webp
+  - /images/post2.png
 
-description: 'Une explication simplifié de la pattern "Operator" pour Kubernetes'
+description: 'Une explication simplifiée de la pattern "Operator" pour Kubernetes'
 toc:
 ---
 
