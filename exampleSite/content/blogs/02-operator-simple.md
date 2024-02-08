@@ -30,8 +30,7 @@ Je vous explique: en général si on veut déployer une base de données haute d
 
 Dans Kubernetes c'est différent. Comme les APIs fournissent des objets standard qui décrivent les unités d'exécution, l'équilibrage de charge, la réplication, le scaling, etc... on peut écrire *un programme* qui sait déployer correctement un service complexe dans les règles de l'art. Et peu importe les briques techniques ou les OS qui seront derrière, l'ensemble des mécanismes dont le service a besoin pour fonctionner seront garantis par l'API et les objets que le dit programme aura créé. Ce programme, c'est l'Operator.
 
-
-![schema de base operator](/images/blogs/02-operator-simple/operatro-base.png)
+{{< picture "blogs/02-operator-simple/operator-base.svg" "Description d'un opérateur" >}}
 
 ## Operator: la magie c'est l'API
 
@@ -94,7 +93,7 @@ spec:
 
 En installant un Operator, on enrichit donc l'API Kubernetes de nouveaux objets, dont la signature est connue de l'Operator. Ces objets sont validés par l'API Kubernetes et stockés dans le backend Kubernetes (base etcd ou postresql en général). C'est très pratique parce qu'on délègue la validation et le stockage des instanciations de ces nouveaux objets, les `Custom Resources` (notre instance de `PerconaServerMongoDB` avec ses 5 replicas), à Kubernetes. Ça allège le code et ça permet également de bénéficier, pour ces nouvelles ressources, du support natif de fonctionnalités Kubernetes, tel que RBAC(=qui a le droit de créer/modifier une base mongo), nativement supporté pour les `Custom Resources` comme toutes resources classique de Kubernetes.
 
-![img](/images/blogs/02-operator-simple/CrCrd.png)
+{{< picture "blogs/02-operator-simple/CrCrd.png" "Cr vs CRD" >}}
 
 ## Controller et boucle de réconciliation 
 
@@ -104,7 +103,7 @@ Le `Controller` réconcilie votre définition de ressource avec l'état du clust
   * si vous modifier la définition de votre bdd, le `Controller` va prendre en charge la mise à jour de la config dans les objets Kubernetes
   * si vous modifer les objets Kubernetes créés par le `Controller`, celui-ci va écraser vos modifications
 
-![img](/images/blogs/02-operator-simple/loop.png)
+{{< picture "blogs/02-operator-simple/loop.png" "La boucle de réconciliation" >}}
 
 Ce ce qu'on appelle "la boucle de réconciliation". Bêtement le `Controller` de votre Operator fera absolument tout ce qu'il peut pour que votre cluster Kubernetes reflète très exactement les spécifications que vous avez demandé pour une des `Custom Resource` qu'il contrôle.
 
